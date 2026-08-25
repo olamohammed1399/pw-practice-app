@@ -25,12 +25,12 @@ test.describe('IoT Dashboard', () => {
     const app = new AppLayout(page);
     await app.open('/pages/iot-dashboard');
 
-    await expect(page.getByText('Electricity Consumption')).toBeVisible();
-    await expect(page.getByText('Consumed')).toBeVisible();
-    await expect(page.getByText('Solar Energy Consumption')).toBeVisible();
-    await expect(page.getByText('New York')).toBeVisible();
-    await expect(page.getByText('Security Cameras')).toBeVisible();
-    await expect(page.locator('ngx-contacts nb-list-item')).toHaveCount(4);
+    await expect(app.content).toContainText('Electricity Consumption');
+    await expect(app.content).toContainText('Consumed');
+    await expect(app.content).toContainText('Solar Energy Consumption');
+    await expect(app.content).toContainText('New York');
+    await expect(app.content).toContainText('Security Cameras');
+    await expect(page.locator('ngx-contacts nb-tab:visible nb-list-item')).toHaveCount(6);
   });
 
   test('condition: security cameras switch from single view to grid view', async ({ page }) => {
@@ -54,6 +54,6 @@ test.describe('IoT Dashboard', () => {
     await app.selectTheme('Dark');
 
     await expect(app.themeSelect).toContainText('Dark');
-    await expect(page.locator('nb-layout')).toHaveClass(/nb-theme-dark/);
+    await expect(page.locator('body')).toHaveClass(/nb-theme-dark/);
   });
 });

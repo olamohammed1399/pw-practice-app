@@ -2,7 +2,12 @@ import { expect, test, type Page } from '@playwright/test';
 import { AppLayout } from './support/app-locators';
 
 function activeCalendarDay(page: Page, day: string) {
-  return page.locator('nb-calendar-day-cell:not(.bounding-month)').filter({ hasText: new RegExp(`^${day}$`) }).first();
+  return page
+    .locator('nb-calendar')
+    .first()
+    .locator('nb-calendar-day-cell:not(.bounding-month)')
+    .filter({ hasText: new RegExp(`^\\s*${day}\\s*$`) })
+    .first();
 }
 
 test.describe('Extra Components / Calendar', () => {
@@ -36,8 +41,16 @@ test.describe('Extra Components / Calendar', () => {
     await app.open('/pages/extra-components/calendar');
 
     const rangeCalendar = page.locator('nb-calendar-range');
-    await rangeCalendar.locator('nb-calendar-day-cell:not(.bounding-month)').filter({ hasText: /^8$/ }).first().click();
-    await rangeCalendar.locator('nb-calendar-day-cell:not(.bounding-month)').filter({ hasText: /^12$/ }).first().click();
+    await rangeCalendar
+      .locator('nb-calendar-range-day-cell:not(.bounding-month)')
+      .filter({ hasText: /^8$/ })
+      .first()
+      .click();
+    await rangeCalendar
+      .locator('nb-calendar-range-day-cell:not(.bounding-month)')
+      .filter({ hasText: /^12$/ })
+      .first()
+      .click();
 
     await expect(page.locator('.calendar-container').nth(1).locator('.subtitle')).toContainText(/\b8,\s+\d{4} - .*12,\s+\d{4}/);
   });

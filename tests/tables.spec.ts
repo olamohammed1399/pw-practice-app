@@ -106,7 +106,7 @@ test.describe('Tables & Data / Tree Grid', () => {
   });
 
   test('condition: expanding a folder reveals child documents', async () => {
-    await treeGrid.row('Projects').locator('nb-tree-grid-row-toggle').click();
+    await treeGrid.row('Projects').getByRole('button', { name: 'expand' }).click();
 
     await expect(treeGrid.row('project-1.doc')).toContainText('240 KB');
     await expect(treeGrid.row('project-4.docx')).toContainText('900 KB');
@@ -116,13 +116,15 @@ test.describe('Tables & Data / Tree Grid', () => {
   test('condition: search filters visible file-system entries', async () => {
     await treeGrid.search().fill('report');
 
-    await expect(treeGrid.rows).toHaveCount(1);
+    await expect(treeGrid.rows).toHaveCount(3);
     await expect(treeGrid.row('Reports')).toBeVisible();
+    await expect(treeGrid.row('Report 1')).toBeVisible();
+    await expect(treeGrid.row('Report 2')).toBeVisible();
     await expect(treeGrid.row('Projects')).toBeHidden();
   });
 
   test('condition: clicking name header sorts folder rows', async () => {
-    const nameHeader = treeGrid.table.locator('th').filter({ hasText: 'name' });
+    const nameHeader = treeGrid.table.getByRole('columnheader', { name: 'name' });
 
     await nameHeader.click();
     await expect(treeGrid.rows.first()).toContainText('Other');

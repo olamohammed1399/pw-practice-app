@@ -16,8 +16,8 @@ const routes = [
   { parent: 'Tables & Data', child: 'Tree Grid', url: /\/pages\/tables\/tree-grid$/, heading: 'Tree Grid' },
   { parent: 'Auth', child: 'Login', url: /\/auth\/login$/, heading: 'Login' },
   { parent: 'Auth', child: 'Register', url: /\/auth\/register$/, heading: 'Register' },
-  { parent: 'Auth', child: 'Request Password', url: /\/auth\/request-password$/, heading: 'Request' },
-  { parent: 'Auth', child: 'Reset Password', url: /\/auth\/reset-password$/, heading: 'Reset' },
+  { parent: 'Auth', child: 'Request Password', url: /\/auth\/request-password$/, heading: 'Forgot Password' },
+  { parent: 'Auth', child: 'Reset Password', url: /\/auth\/reset-password$/, heading: 'Change password' },
 ];
 
 test.describe('System navigation', () => {

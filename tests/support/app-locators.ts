@@ -130,8 +130,8 @@ export class TreeGridPage {
 
   constructor(readonly page: Page) {
     this.app = new AppLayout(page);
-    this.table = page.locator('table[nbtreegrid]');
-    this.rows = this.table.locator('tr[nbtreegridrow]');
+    this.table = page.locator('ngx-tree-grid table');
+    this.rows = this.table.locator('tbody tr');
   }
 
   async open() {
